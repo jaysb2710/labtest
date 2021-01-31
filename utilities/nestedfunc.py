@@ -1,5 +1,4 @@
 import operator
-import array
 from collections import defaultdict
 
 users = {"people": {"john": {"age": "23"}}}
