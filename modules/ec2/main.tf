@@ -1,6 +1,6 @@
 resource "aws_instance" "appserver" {
 
-  ami                           = "ami-01aab85a5e4a5a0fe"
+  ami                           = "var.amis[var.region]"
   instance_type                 = "t2.micro"
   instance_count                = 1
   associate_public_ip_address   = true

@@ -12,3 +12,11 @@ variable "security-group-ids" {
   type        = "list"
   description = "sg ids to be attched to this instance"
 }
+
+variable "amis" {
+  type = "map"
+  default = {
+    "us-east-1" = "ami-*"
+    "us-west-2" = "ami-*"
+  }
+}
