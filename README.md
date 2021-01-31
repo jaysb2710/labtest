@@ -17,6 +17,9 @@ This approach allows reusabilty by adding/selecting environment based config fil
 
 <i>The config can be enhanced by adding more resources like LaunchConfig, ASG etc</i>
 
+- utils <br>
+        Contains python script to query Meta-data
+
 ## How to run 
 
 1- Install terraform <br>
