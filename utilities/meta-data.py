@@ -4,32 +4,32 @@ import requests
 
 metadata_url = 'http://169.254.169.254/latest/'
 
-def fetch_metadata():
-    initial = ["meta-data/"]
-    result = get_list(metadata_url, initial)
-    return result
 
-
-def get_list(url, array):
+def get_tree(url, arr):
     output = {}
-    for entries in array:
-        new_url = url + entries
+    for entry in arr:
+        new_url = url + entry
         a = requests.get(new_url)
         text = a.text
-        if entries[-1] == '/':
-            list_values = a.text.splitlines()
-            output[entries[:-1]] = get_list(new_url, list_values)
+        if entry[-1] == "/":
+            list_of_values = a.text.splitlines()
+            output[entry[:-1]] = get_tree(new_url, list_of_values)
         elif is_json(text):
-          output[entries] = json.loads(text)
+            output[entry] = json.loads(text)
         else:
-            output[entries] = text
+            output[entry] = text
     return output
 
+
+def fetch_metadata():
+    initial = ["meta-data/"]
+    result = get_tree(metadata_url, initial)
+    return result
 
 
 def fetch_metadata_json():
     metadata = fetch_metadata()
-    metadata_json = json.dumps(metadata, indent=6)
+    metadata_json = json.dumps(metadata, indent=6, sort_keys=True)
     return metadata_json
 
 
